@@ -4,23 +4,15 @@ import java.text.NumberFormat;
 
 public class ReportBalance {
 
-    private final NumberFormat currency;
-    private CalculateBalance calculator;
+    private static final NumberFormat currency = null;
 
-    public ReportBalance (CalculateBalance calculator){
-        this.calculator = calculator;
-        currency = NumberFormat.getCurrencyInstance();
-    }
-
-    public void printBalance() {
-        double balance = calculator.calculateBalance();
-        double availableFunds = calculator.calculateFunds();
-        String closingBalanceFormatted = currency.format(balance);
-        String availableFundsFormatted = currency.format(availableFunds);
+    public static void printBalance(double balance, double availableFunds) {
+        //String closingBalanceFormatted = currency.format(balance);
+        //String availableFundsFormatted = currency.format(availableFunds);
         System.out.println("Account Balance");
         System.out.println("______________________________________");
-        System.out.println("Your balance is: " + closingBalanceFormatted);
+        System.out.println("Your balance is: " + balance);
         System.out.println("______________________________________");
-        System.out.println("Your Available Funds are " + availableFundsFormatted);
+        System.out.println("Your Available Funds are " + availableFunds);
     }
 }

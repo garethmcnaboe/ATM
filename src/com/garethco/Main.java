@@ -3,12 +3,13 @@ package com.garethco;
 public class Main {
 
     public static void main(String[] args) {
-        double depositAmount = 0;
-        double withdrawalAmount = 0;
-        double openingBalance = 500;
-        double overdraft = 200;
+        double deposit;
+        double withdrawal;
+        double availableFunds;
+        double balance;
 
         boolean passwordCorrect = Password.EnterPassword();
+        Balance customer1 = new Balance();
 
                 if (passwordCorrect) {
 
@@ -17,18 +18,19 @@ public class Main {
                         String transactionType = Console.readTransactionType();
 
                         if (transactionType.equals("d")) {
-                            depositAmount += DepositScreen.readDepositAmount();
+                            deposit = DepositScreen.readDepositAmount();
+                            customer1.setDepositAmount(deposit);
                         }
 
                         if (transactionType.equals("w")) {
-                            //var availableFunds = new CalculateBalance(openingBalance,depositAmount,withdrawalAmount,overdraft);
-                            double availableFunds = openingBalance + overdraft - withdrawalAmount + depositAmount;
-                            withdrawalAmount += WithdrawalScreen.readWithdrawalAmount(availableFunds);
+                            availableFunds = customer1.calculateFunds();
+                            withdrawal = WithdrawalScreen.readWithdrawalAmount(availableFunds);
+                            customer1.setWithdrawalAmount(withdrawal);
                         }
 
-                        var balance = new CalculateBalance(openingBalance, depositAmount, withdrawalAmount, overdraft);
-                        var report = new ReportBalance(balance);
-                        report.printBalance();
+                        balance = customer1.calculateBalance();
+                        availableFunds = customer1.calculateFunds();
+                        ReportBalance.printBalance(balance, availableFunds);
 
                         String anotherTransaction = Console.readAnotherTransaction();
 
